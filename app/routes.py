@@ -58,7 +58,11 @@ def login():
 
     return """
     <form method="POST">
-        <input name="username" placeholder="Username">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input name="username" placeholder="Username">
+    <input name="password" type="password" placeholder="Password">
+    <button type="submit">Login</button>
+</form>
         <input name="password" type="password" placeholder="Password">
         <button type="submit">Login</button>
     </form>
