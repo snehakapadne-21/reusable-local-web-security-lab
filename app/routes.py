@@ -38,7 +38,6 @@ def search():
         query=query
     )
 
-
 @bp.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -56,17 +55,15 @@ def login():
 
         return "Invalid login", 401
 
-    return """
-    <form method="POST">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <input name="username" placeholder="Username">
-    <input name="password" type="password" placeholder="Password">
-    <button type="submit">Login</button>
-</form>
+    return render_template_string("""
+    <form method="POST" action="{{ url_for('main.login') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input name="username" placeholder="Username">
         <input name="password" type="password" placeholder="Password">
         <button type="submit">Login</button>
     </form>
-    """
+    """)
+    
 
 
 @bp.route("/profile")
